@@ -31,3 +31,11 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### docx ###
+*.docx
+
+### DB ###
+/data/
+*.mv.db
+*.trace.db
