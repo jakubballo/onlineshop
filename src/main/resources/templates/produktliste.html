@@ -16,6 +16,7 @@
 				<td th:text="${produkt.modell}"></td>
 				<td th:text="${produkt.zustand}"></td>
 				<td th:text="${produkt.preis}"></td>
+				<td><a th:href="@{/produkte/{id}(id=${produkt.id})}">Mehr Details</a></td>
 			</tr>
 		</table>
 	</body>
