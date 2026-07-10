@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>
+			Produkt Formular
+		</title>
+	</head>
+	<body>
+		<form th:action="@{/admin/produkte/neu}" method="post" th:object="${produkt}">
+			<label>Hersteller: </label><input type="text" th:field="*{hersteller}" />
+			<label>Modell: </label><input type="text" th:field="*{modell}" />
+			<label>Zustand: </label><input type="text" th:field="*{zustand}" />
+			<label>Preis: </label><input type="text" th:field="*{preis}" />
+			<label>Beschreibung: </label><input type="text" th:field="*{beschreibung}" />
+			<label>Lagerbestand: </label><input type="text" th:field="*{lagerbestand}" />
+			<label>Bildpfad: </label><input type="text" th:field="*{bildpfad}" />
+			<label>Kategorie: </label>
+			<select th:field="*{kategorie}">
+				<option value="">bitte wählen</option>
+				<option th:each="kat : ${kategorien}" th:value="${kat.id}" th:text="${kat.name}"></option>
+			</select>
+			<button type="submit">Speichern</button>
+		</form>
+	</body>
+</html>

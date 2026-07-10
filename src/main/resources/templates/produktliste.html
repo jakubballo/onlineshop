@@ -17,6 +17,11 @@
 				<td th:text="${produkt.zustand}"></td>
 				<td th:text="${produkt.preis}"></td>
 				<td><a th:href="@{/produkte/{id}(id=${produkt.id})}">Mehr Details</a></td>
+				<td>
+					<form th:action="@{/admin/produkte/{id}/loeschen(id=${produkt.id})}" method="post">
+						<button type="submit">Löschen</button>
+					</form>
+				</td>
 			</tr>
 		</table>
 	</body>

@@ -1,0 +1,14 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>
+			Kategorie Formular
+		</title>
+	</head>
+	<body>
+		<form th:action="@{/admin/kategorien/neu}" method="post" th:object="${kategorie}">
+			<label>Name: </label><input type="text" th:field="*{name}" />
+			<label>Beschreibung: </label><input type="text" th:field="*{beschreibung}" />
+			<button type="submit">Speichern</button>
+		</form>
+	</body>
+</html>

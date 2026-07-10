@@ -1,0 +1,25 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>
+			Kategorie Liste
+		</title>
+	</head>
+	<body>
+		<h1>Unsere Kategorien</h1>
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Beschreibung</th>
+			</tr>
+			<tr th:each="kategorie : ${kategorien}">
+				<td th:text="${kategorie.name}"></td>
+				<td th:text="${kategorie.beschreibung}"></td>
+				<td>
+					<form th:action="@{/admin/kategorien/{id}/loeschen(id=${kategorie.id})}" method="post">
+						<button type="submit">Löschen</button>
+					</form>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

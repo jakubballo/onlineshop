@@ -9,5 +9,8 @@ import de.iu.projekt.onlineshop.model.Produkt;
 
 @Repository
 public interface ProduktRepository  extends JpaRepository<Produkt, Long>{
-
+	
+	//Alle produkte nach Kategorie ID zählen
+	long countByKategorieId(Long kategorieId);
+	
 }
