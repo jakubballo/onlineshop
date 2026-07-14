@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<head>
 		<title>Produktübersicht</title>
 	</head>
@@ -17,12 +17,16 @@
 				<td th:text="${produkt.zustand}"></td>
 				<td th:text="${produkt.preis}"></td>
 				<td><a th:href="@{/produkte/{id}(id=${produkt.id})}">Mehr Details</a></td>
-				<td>
+				<td sec:authorize="hasRole('ADMIN')">
 					<form th:action="@{/admin/produkte/{id}/loeschen(id=${produkt.id})}" method="post">
 						<button type="submit">Löschen</button>
 					</form>
 				</td>
+				<td sec:authorize="hasRole('ADMIN')">
+					<a th:href="@{/admin/produkte/{id}/bearbeiten(id=${produkt.id})}" class="btn">Bearbeiten</a>
+				</td>
 			</tr>
 		</table>
+		<a th:href="@{/}">Zurück zu Startseite</a>
 	</body>
 </html>

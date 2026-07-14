@@ -1,6 +1,7 @@
 package de.iu.projekt.onlineshop.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +25,7 @@ public class KategorieController {
 		this.produktRepository = produktRepository;
 	}
 	
-	//Kategorien auflisten
+	//Kategorien Anzeigen
 	@GetMapping("/kategorien")
 	public String kategorieListe(Model model) {
 		List<Kategorie> kategorieListe = kategorieRepository.findAll();
@@ -33,7 +34,7 @@ public class KategorieController {
 		return "kategorieliste";
 	}
 	
-	//Für Kategorie Anlegen
+	//Kategorie Anlegen
 	@GetMapping("/admin/kategorien/neu")
 	public String kategorieAnlegen(Model model) {
 		Kategorie kategorie = new Kategorie();
@@ -42,7 +43,7 @@ public class KategorieController {
 		return "kategorieformular";
 	}
 	
-	//Daten aus Formular speichern
+	//Daten aus Formular speichern für Neue Kategorie
 	@PostMapping("/admin/kategorien/neu")
 	public String kategorieAnlegenPost(@ModelAttribute Kategorie kategorie) {
 		kategorieRepository.save(kategorie);
@@ -59,6 +60,25 @@ public class KategorieController {
 			return "redirect:/kategorien";
 		}
 			
+		return "redirect:/kategorien";
+	}
+	
+	//Kategorie Bearbeiten
+	@GetMapping("/admin/kategorien/{id}/bearbeiten")
+	public String kategorieBearbeiten(@PathVariable Long id, Model model) {
+		Optional <Kategorie> kategorieDetails = kategorieRepository.findById(id);
+		Kategorie kategorie = kategorieDetails.orElseThrow();
+		
+		model.addAttribute("kategorie", kategorie);
+		
+		return "kategorieformular";
+	}
+	
+	//Daten aus Formular speichern für Bearbeiten
+	@PostMapping("/admin/kategorien/{id}/bearbeiten")
+	public String kategorieBearbeitenPost(@PathVariable Long id, @ModelAttribute Kategorie kategorie) {
+		kategorieRepository.save(kategorie);
+		
 		return "redirect:/kategorien";
 	}
 }

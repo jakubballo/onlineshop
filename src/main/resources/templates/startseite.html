@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<title>
+			Startseite Online Shop
+		</title>
+	</head>
+	<body>
+		<h1>Online Shop Ballo</h1>
+		<a th:href="@{/produkte}">Zu den Produkten</a>
+		<a th:href="@{/kategorien}">Zu den Kategorien</a>
+		<a th:href="@{/login}" sec:authorize="!isAuthenticated()">Login</a>
+		<a th:href="@{/registrieren}" sec:authorize="!isAuthenticated()">Registrieren</a>
+		<form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+			<button type="submit">Abmelden</button>
+		</form>
+	</body>
+</html>

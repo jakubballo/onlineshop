@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 	<head>
 		<title>
 			Kategorie Liste
@@ -14,12 +14,16 @@
 			<tr th:each="kategorie : ${kategorien}">
 				<td th:text="${kategorie.name}"></td>
 				<td th:text="${kategorie.beschreibung}"></td>
-				<td>
+				<td sec:authorize="hasRole('ADMIN')">
 					<form th:action="@{/admin/kategorien/{id}/loeschen(id=${kategorie.id})}" method="post">
 						<button type="submit">Löschen</button>
 					</form>
 				</td>
+				<td sec:authorize="hasRole('ADMIN')">
+					<a th:href="@{/admin/kategorien/{id}/bearbeiten(id=${kategorie.id})}" class="btn">Bearbeiten</a>
+				</td>
 			</tr>
 		</table>
+		<a th:href="@{/}">Zurück zu Startseite</a>
 	</body>
 </html>

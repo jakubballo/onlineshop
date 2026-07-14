@@ -5,7 +5,9 @@
 		</title>
 	</head>
 	<body>
-		<form th:action="@{/admin/kategorien/neu}" method="post" th:object="${kategorie}">
+		<form th:action="${kategorie.id} != null ? @{/admin/kategorien/{id}/bearbeiten(id=${kategorie.id})} : @{/admin/kategorien/neu}" 		
+		method="post" th:object="${kategorie}">
+			<input type="hidden" th:field="*{id}"/>
 			<label>Name: </label><input type="text" th:field="*{name}" />
 			<label>Beschreibung: </label><input type="text" th:field="*{beschreibung}" />
 			<button type="submit">Speichern</button>

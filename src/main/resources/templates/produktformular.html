@@ -5,7 +5,8 @@
 		</title>
 	</head>
 	<body>
-		<form th:action="@{/admin/produkte/neu}" method="post" th:object="${produkt}">
+		<form th:action="${produkt.id} != null ? @{/admin/produkte/{id}/bearbeiten(id=${produkt.id})} : @{/admin/produkte/neu}" method="post" th:object="${produkt}">
+			<input type="hidden" th:field="*{id}"/>
 			<label>Hersteller: </label><input type="text" th:field="*{hersteller}" />
 			<label>Modell: </label><input type="text" th:field="*{modell}" />
 			<label>Zustand: </label><input type="text" th:field="*{zustand}" />

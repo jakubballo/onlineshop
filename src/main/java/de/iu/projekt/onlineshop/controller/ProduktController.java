@@ -73,4 +73,26 @@ public class ProduktController {
 		
 		return "redirect:/produkte";
 	}
+	
+	//Produkt bearbeiten
+	@GetMapping("/admin/produkte/{id}/bearbeiten")
+	public String produktBearbeiten(@PathVariable Long id, Model model) {
+		Optional<Produkt> produktDetails = produktRepository.findById(id);
+		Produkt produkt = produktDetails.orElseThrow();
+		
+		model.addAttribute("produkt", produkt);
+		
+		List<Kategorie> kategorieListe = kategorieRepository.findAll();
+		model.addAttribute("kategorien", kategorieListe);
+		
+		return "produktformular";
+	}
+	
+	//Produkt bearbeiten Speichern
+	@PostMapping("/admin/produkte/{id}/bearbeiten")
+	public String produktBearbeitenPost(@PathVariable Long id, @ModelAttribute Produkt produkt) {
+		produktRepository.save(produkt);
+		
+		return "redirect:/produkte";
+	}
 }
