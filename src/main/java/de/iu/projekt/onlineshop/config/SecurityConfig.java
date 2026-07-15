@@ -10,15 +10,17 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
+	//Standard Hash Methode von Spring
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	
+	//Zugriffsrollen auf Seiten
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
 		return httpSecurity.authorizeHttpRequests(auth -> auth
-				.requestMatchers("/","/produkte","/produkte/**","/kategorien","/registrieren","/login","/h2-console/**").permitAll()
+				.requestMatchers("/","/produkte","/produkte/**","/kategorien","/registrieren","/login","/h2-console/**","/warenkorb/**").permitAll()
 				.requestMatchers("/admin/**").hasRole("ADMIN")
 				.anyRequest().authenticated()
 				)

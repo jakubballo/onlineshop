@@ -27,7 +27,7 @@ public class Produkt {
 	private int lagerbestand;
 	private String bildpfad;
 	@ManyToOne
-	@JoinColumn(name = "kategorie_id")
+	@JoinColumn(name = "kategorie_id") //Anbindung an Tabelle Kategorie
 	private Kategorie kategorie;
 	
 	//Standard Konstruktor

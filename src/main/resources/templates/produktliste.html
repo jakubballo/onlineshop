@@ -25,8 +25,14 @@
 				<td sec:authorize="hasRole('ADMIN')">
 					<a th:href="@{/admin/produkte/{id}/bearbeiten(id=${produkt.id})}" class="btn">Bearbeiten</a>
 				</td>
+				<td>
+					<form th:action="@{/warenkorb/hinzufuegen/{id}(id=${produkt.id})}" method="post">
+						<button type="submit">In den Warenkorb</button>
+					</form>
+				</td>
 			</tr>
 		</table>
+		<a th:href="@{/warenkorb/liste}">Zum Warenkorb</a>
 		<a th:href="@{/}">Zurück zu Startseite</a>
 	</body>
 </html>

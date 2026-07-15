@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<title>Warenkorb</title>
+	</head>
+	<body>
+		<h1>Mein Warenkorb</h1>
+		<table>
+			<tr>
+				<th>Produkt</th>
+				<th>Menge</th>
+				<th>Preis</th>
+			</tr>
+			<tr th:each="eintrag : ${warenkorbeinträge}">
+				<td th:text="${eintrag.produkt.hersteller}"></td>
+				<td th:text="${eintrag.menge}"></td>
+				<td th:text="${eintrag.produkt.preis}"></td>
+				<td>
+					<form th:action="@{/warenkorb/entfernen/{id}(id=${eintrag.produkt.id})}" method="post">
+						<button type="submit">Entfernen</button>
+					</form>
+				</td>
+			</tr>
+		</table>
+		<h2 th:text="${gesamtsumme}"></h2>
+		<a th:href="@{/}">Zurück zu Startseite</a>
+	</body>
+</html>
