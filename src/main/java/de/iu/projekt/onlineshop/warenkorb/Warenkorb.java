@@ -44,4 +44,9 @@ public class Warenkorb {
 		}
 		return summe;
 	}
+
+	//Warenkorb leeren
+	public void leeren() {
+		eintraege.clear();
+	}
 }
