@@ -9,4 +9,5 @@ import de.iu.projekt.onlineshop.model.Bestellposition;
 public interface BestellpositionRepository extends JpaRepository<Bestellposition, Long>{
 	
 	List<Bestellposition> findByBestellungId(Long bestellungId);
+	long countByProduktId(Long produktId);
 }

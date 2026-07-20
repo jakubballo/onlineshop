@@ -22,6 +22,7 @@ public class RegistrierungsController {
 		this.passwordEncoder = passwordEncoder;
 	}
 	
+	//Neuen nutzer anlegen
 	@GetMapping("/registrieren")
 	public String neuesNutzer(Model model) {
 		Nutzer nutzer = new Nutzer();
@@ -30,6 +31,7 @@ public class RegistrierungsController {
 		return "registrierformular";
 	}
 	
+	//Neuen nutzer speichern
 	@PostMapping("/registrieren")
 	public String neuesNutzerPost(@ModelAttribute Nutzer nutzer) {
 		String password = nutzer.getPasswort();

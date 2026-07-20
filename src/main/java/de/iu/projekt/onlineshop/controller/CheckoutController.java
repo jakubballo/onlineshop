@@ -44,6 +44,7 @@ public class CheckoutController {
 		return warenkorb;
 	}
 	
+	//Checkout POST, Warenkorb inhalt und Zahlungsart wird als neue Bestellung angelegt
 	@PostMapping("/checkout")
 	public String checkout(Authentication authentication, HttpSession session, Zahlungsart zahlungsart) {
 		String email = authentication.getName();
@@ -64,6 +65,7 @@ public class CheckoutController {
 		return "redirect:/bestellung/" + bestellung.getId();
 	}
 	
+	//Bestell details für Bestellbestätigungsseite 
 	@GetMapping("/bestellung/{id}")
 	public String bestellungAnzeigen(@PathVariable Long id, Model model) {
 		Bestellung bestellung = bestellungRepository.findById(id).orElseThrow();

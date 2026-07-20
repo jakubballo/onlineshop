@@ -18,6 +18,7 @@ public class ProfilController {
 		this.nutzerRepository = nutzerRepository;
 	}
 	
+	//Profil details anzeigen
 	@GetMapping("/profil")
 	public String profilBearbeiten(Authentication authentication, Model model) {
 		String email = authentication.getName();
@@ -38,6 +39,7 @@ public class ProfilController {
 		return "profilbearbeiten";
 	}
 	
+	//Formular daten übertragen
 	@PostMapping("/profil/bearbeiten")
 	public String profilBearbeitenFormularPost(Authentication authentication, @ModelAttribute Nutzer nutzer) {
 		String email = authentication.getName();

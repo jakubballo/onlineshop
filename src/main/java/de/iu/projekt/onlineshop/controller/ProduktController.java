@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import de.iu.projekt.onlineshop.model.Kategorie;
 import de.iu.projekt.onlineshop.model.Produkt;
+import de.iu.projekt.onlineshop.repository.BestellpositionRepository;
 import de.iu.projekt.onlineshop.repository.KategorieRepository;
 import de.iu.projekt.onlineshop.repository.ProduktRepository;
 
@@ -20,10 +21,12 @@ public class ProduktController {
 
 	private final ProduktRepository produktRepository;
 	private final KategorieRepository kategorieRepository;
+	private final BestellpositionRepository bestellpositionRepository;
 	
-	public ProduktController(ProduktRepository produktRepository, KategorieRepository kategorieRepository) {
+	public ProduktController(ProduktRepository produktRepository, KategorieRepository kategorieRepository, BestellpositionRepository bestellpositionRepository) {
 		this.produktRepository = produktRepository;
 		this.kategorieRepository = kategorieRepository;
+		this.bestellpositionRepository = bestellpositionRepository;
 	}
 	
 	//Alle Produkte auflisten
@@ -69,9 +72,10 @@ public class ProduktController {
 	//Produkt nach id Löschen
 	@PostMapping("/admin/produkte/{id}/loeschen")
 	public String produktLoeschen(@PathVariable Long id) {
-		produktRepository.deleteById(id);
-		
-		return "redirect:/produkte";
+	    if (bestellpositionRepository.countByProduktId(id) == 0) {
+	        produktRepository.deleteById(id);
+	    }
+	    return "redirect:/produkte";
 	}
 	
 	//Produkt bearbeiten

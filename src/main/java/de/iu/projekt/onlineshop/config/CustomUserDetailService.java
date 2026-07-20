@@ -20,6 +20,7 @@ public class CustomUserDetailService implements UserDetailsService {
 		this.nutzerRepository = nutzerRepository;
 	}
 	
+	//Anlegen von neuen Nutzer
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Optional<Nutzer> nutzer = nutzerRepository.findByEmail(username);
