@@ -1,10 +1,11 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-	<head>
-		<title>Produktübersicht</title>
-	</head>
+<head th:replace="~{fragments/layout :: head}"></head>
 	<body>
+		<div th:replace="~{fragments/layout :: navigation}"></div>
+		<div class="container mt-4">
 		<h1>Unsere Produkte</h1>
-		<table>
+		<a th:href="@{/admin/produkte/neu}" class="btn btn-success mb-3" sec:authorize="hasRole('ADMIN')">Neues Produkt anlegen</a>
+		<table class="table table-striped table-hover">
 			<tr>
 				<th>Hersteller</th>
 				<th>Modell</th>
@@ -16,23 +17,22 @@
 				<td th:text="${produkt.modell}"></td>
 				<td th:text="${produkt.zustand}"></td>
 				<td th:text="${produkt.preis}"></td>
-				<td><a th:href="@{/produkte/{id}(id=${produkt.id})}">Mehr Details</a></td>
+				<td><a th:href="@{/produkte/{id}(id=${produkt.id})}" class="btn btn-outline-secondary btn-sm">Mehr Details</a></td>
 				<td sec:authorize="hasRole('ADMIN')">
 					<form th:action="@{/admin/produkte/{id}/loeschen(id=${produkt.id})}" method="post">
-						<button type="submit">Löschen</button>
+						<button type="submit" class="btn btn-danger btn-sm">Löschen</button>
 					</form>
 				</td>
 				<td sec:authorize="hasRole('ADMIN')">
-					<a th:href="@{/admin/produkte/{id}/bearbeiten(id=${produkt.id})}" class="btn">Bearbeiten</a>
+					<a th:href="@{/admin/produkte/{id}/bearbeiten(id=${produkt.id})}" class="btn btn-warning btn-sm">Bearbeiten</a>
 				</td>
 				<td>
 					<form th:action="@{/warenkorb/hinzufuegen/{id}(id=${produkt.id})}" method="post">
-						<button type="submit">In den Warenkorb</button>
+						<button type="submit" class="btn btn-primary btn-sm">In den Warenkorb</button>
 					</form>
 				</td>
 			</tr>
 		</table>
-		<a th:href="@{/warenkorb/liste}">Zum Warenkorb</a>
-		<a th:href="@{/}">Zurück zu Startseite</a>
+		</div>
 	</body>
 </html>

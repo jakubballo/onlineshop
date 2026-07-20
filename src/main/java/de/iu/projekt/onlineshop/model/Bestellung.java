@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,20 +25,32 @@ public class Bestellung {
 	private LocalDateTime bestelldatum;
 	@Column(precision=10,scale=2)
 	private BigDecimal gesamtsumme;
+	@Enumerated(EnumType.STRING)
+	private Zahlungsart zahlungsart;
 	
+	public Zahlungsart getZahlungsart() {
+		return zahlungsart;
+	}
+
+	public void setZahlungsart(Zahlungsart zahlungsart) {
+		this.zahlungsart = zahlungsart;
+	}
+
 	public Bestellung() {}
 	
-	public Bestellung(Long id,Nutzer nutzer, LocalDateTime bestelldatum, BigDecimal gesamtsumme) {
+	public Bestellung(Long id,Nutzer nutzer, LocalDateTime bestelldatum, BigDecimal gesamtsumme, Zahlungsart zahlungsart) {
 		this.id = id;
 		this.nutzer = nutzer;
 		this.bestelldatum = bestelldatum;
 		this.gesamtsumme = gesamtsumme;
+		this.zahlungsart = zahlungsart;
 	}
 	
-	public Bestellung(Nutzer nutzer, LocalDateTime bestelldatum, BigDecimal gesamtsumme) {
+	public Bestellung(Nutzer nutzer, LocalDateTime bestelldatum, BigDecimal gesamtsumme, Zahlungsart zahlungsart) {
 		this.nutzer = nutzer;
 		this.bestelldatum = bestelldatum;
 		this.gesamtsumme = gesamtsumme;
+		this.zahlungsart = zahlungsart;
 	}
 
 	public Long getId() {

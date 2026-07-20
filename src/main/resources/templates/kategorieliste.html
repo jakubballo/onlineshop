@@ -1,12 +1,11 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-	<head>
-		<title>
-			Kategorie Liste
-		</title>
-	</head>
+<head th:replace="~{fragments/layout :: head}"></head>
 	<body>
+		<div th:replace="~{fragments/layout :: navigation}"></div>
+		<div class="container mt-4">
 		<h1>Unsere Kategorien</h1>
-		<table>
+		<a th:href="@{/admin/kategorien/neu}" class="btn btn-success mb-3" sec:authorize="hasRole('ADMIN')">Neue Kategorie anlegen</a>
+		<table class="table table-striped table-hover">
 			<tr>
 				<th>Name</th>
 				<th>Beschreibung</th>
@@ -16,14 +15,14 @@
 				<td th:text="${kategorie.beschreibung}"></td>
 				<td sec:authorize="hasRole('ADMIN')">
 					<form th:action="@{/admin/kategorien/{id}/loeschen(id=${kategorie.id})}" method="post">
-						<button type="submit">Löschen</button>
+						<button type="submit" class="btn btn-danger btn-sm">Löschen</button>
 					</form>
 				</td>
 				<td sec:authorize="hasRole('ADMIN')">
-					<a th:href="@{/admin/kategorien/{id}/bearbeiten(id=${kategorie.id})}" class="btn">Bearbeiten</a>
+					<a th:href="@{/admin/kategorien/{id}/bearbeiten(id=${kategorie.id})}" class="btn btn-warning btn-sm">Bearbeiten</a>
 				</td>
 			</tr>
 		</table>
-		<a th:href="@{/}">Zurück zu Startseite</a>
+		</div>
 	</body>
 </html>

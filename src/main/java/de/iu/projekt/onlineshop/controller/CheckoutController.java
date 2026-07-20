@@ -1,14 +1,19 @@
 package de.iu.projekt.onlineshop.controller;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import de.iu.projekt.onlineshop.model.Bestellposition;
 import de.iu.projekt.onlineshop.model.Bestellung;
 import de.iu.projekt.onlineshop.model.Nutzer;
+import de.iu.projekt.onlineshop.model.Zahlungsart;
 import de.iu.projekt.onlineshop.repository.BestellpositionRepository;
 import de.iu.projekt.onlineshop.repository.BestellungRepository;
 import de.iu.projekt.onlineshop.repository.NutzerRepository;
@@ -40,13 +45,13 @@ public class CheckoutController {
 	}
 	
 	@PostMapping("/checkout")
-	public String checkout(Authentication authentication, HttpSession session) {
+	public String checkout(Authentication authentication, HttpSession session, Zahlungsart zahlungsart) {
 		String email = authentication.getName();
 		Nutzer nutzer = nutzerRepository.findByEmail(email).orElseThrow();
 		
 		Warenkorb warenkorb = warenkorbAusSession(session);
 		
-		Bestellung bestellung = new Bestellung(nutzer, LocalDateTime.now(), warenkorb.getGesamtsumme());
+		Bestellung bestellung = new Bestellung(nutzer, LocalDateTime.now(), warenkorb.getGesamtsumme(), zahlungsart);
 		bestellung = bestellungRepository.save(bestellung);
 		
 		for (Warenkorbeintrag eintrag : warenkorb.getEintraege()) {
@@ -56,6 +61,17 @@ public class CheckoutController {
 		
 		warenkorb.leeren();
 		
-		return "redirect:/";
+		return "redirect:/bestellung/" + bestellung.getId();
+	}
+	
+	@GetMapping("/bestellung/{id}")
+	public String bestellungAnzeigen(@PathVariable Long id, Model model) {
+		Bestellung bestellung = bestellungRepository.findById(id).orElseThrow();
+		List<Bestellposition> positionen = bestellpositionRepository.findByBestellungId(id);
+		
+		model.addAttribute("bestellung", bestellung);
+		model.addAttribute("positionen", positionen);
+		
+		return "bestellung";
 	}
 }

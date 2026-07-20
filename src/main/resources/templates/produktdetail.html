@@ -1,17 +1,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<title>
-			Produkt Details
-		</title>
-	</head>
+<head th:replace="~{fragments/layout :: head}"></head>
 	<body>
-		<h1 th:text="${produkt.hersteller}"></h1>
-		<p th:text="${produkt.modell}"></p>
-		<p th:text="${produkt.beschreibung}"></p>
-		<p th:text="${produkt.zustand}"></p>
-		<p th:text="${produkt.lagerbestand}"></p>
-		<p th:text="${produkt.preis}"></p>
-		<p th:text="${produkt.kategorie.name}"></p>
+		<div th:replace="~{fragments/layout :: navigation}"></div>
+		<div class="container mt-4">
+			<h1 th:text="${produkt.hersteller}"></h1>
+
+			<div class="card mb-4">
+				<div class="card-body">
+					<p class="mb-1"><strong>Modell: </strong><span th:text="${produkt.modell}"></span></p>
+					<p class="mb-1"><strong>Beschreibung: </strong><span th:text="${produkt.beschreibung}"></span></p>
+					<p class="mb-1"><strong>Zustand: </strong><span th:text="${produkt.zustand}"></span></p>
+					<p class="mb-1"><strong>Lagerbestand: </strong><span th:text="${produkt.lagerbestand}"></span></p>
+					<p class="mb-1"><strong>Preis: </strong><span th:text="${produkt.preis}"></span> €</p>
+					<p class="mb-0"><strong>Kategorie: </strong><span th:text="${produkt.kategorie.name}"></span></p>
+				</div>
+			</div>
+
+			<form th:action="@{/warenkorb/hinzufuegen/{id}(id=${produkt.id})}" method="post" class="d-inline">
+				<button type="submit" class="btn btn-primary">In den Warenkorb</button>
+			</form>
+			<a th:href="@{/produkte}" class="btn btn-outline-secondary">Zurück zu Produktliste</a>
+		</div>
 	</body>
 
 </html>

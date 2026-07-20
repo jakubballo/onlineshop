@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head}"></head>
+	<body>
+		<div th:replace="~{fragments/layout :: navigation}"></div>
+		<div class="container mt-4">
+			<h1 class="mb-4">Mein Profil</h1>
+
+			<div class="card mb-4">
+				<div class="card-body">
+					<p class="mb-1"><strong>E-Mail: </strong><span th:text="${profil.email}"></span></p>
+					<p class="mb-1"><strong>Straße: </strong><span th:text="${profil.strasse}"></span></p>
+					<p class="mb-1"><strong>Hausnummer: </strong><span th:text="${profil.hausnummer}"></span></p>
+					<p class="mb-1"><strong>PLZ: </strong><span th:text="${profil.plz}"></span></p>
+					<p class="mb-0"><strong>Ort: </strong><span th:text="${profil.ort}"></span></p>
+				</div>
+			</div>
+
+			<a th:href="@{/profil/bearbeiten}" class="btn btn-warning">Profil Bearbeiten</a>
+		</div>
+	</body>
+</html>

@@ -77,8 +77,7 @@ public class ProduktController {
 	//Produkt bearbeiten
 	@GetMapping("/admin/produkte/{id}/bearbeiten")
 	public String produktBearbeiten(@PathVariable Long id, Model model) {
-		Optional<Produkt> produktDetails = produktRepository.findById(id);
-		Produkt produkt = produktDetails.orElseThrow();
+		Produkt produkt = produktRepository.findById(id).orElseThrow();
 		
 		model.addAttribute("produkt", produkt);
 		

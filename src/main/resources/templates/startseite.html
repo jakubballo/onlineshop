@@ -1,18 +1,18 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-	<head>
-		<title>
-			Startseite Online Shop
-		</title>
-	</head>
+<head th:replace="~{fragments/layout :: head}"></head>
 	<body>
-		<h1>Online Shop Ballo</h1>
-		<a th:href="@{/produkte}">Zu den Produkten</a>
-		<a th:href="@{/kategorien}">Zu den Kategorien</a>
-		<a th:href="@{/warenkorb/liste}">Zum Warenkorb</a>
-		<a th:href="@{/login}" sec:authorize="!isAuthenticated()">Login</a>
-		<a th:href="@{/registrieren}" sec:authorize="!isAuthenticated()">Registrieren</a>
-		<form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
-			<button type="submit">Abmelden</button>
-		</form>
+		<div th:replace="~{fragments/layout :: navigation}"></div>
+		<div class="container mt-4">
+			<div class="p-5 mb-4 bg-light rounded-3 text-center">
+				<h1 class="mb-3">Willkommen bei Online Shop Ballo</h1>
+				<p class="mb-4">
+					Dein zuverlässiger Partner für PC-Komponenten – von Prozessoren und Grafikkarten
+					bis hin zu Gehäusen und Peripherie. Stöbere durch unser Sortiment und finde genau
+					das, was du für dein nächstes Projekt brauchst.
+				</p>
+				<a th:href="@{/produkte}" class="btn btn-primary me-2">Zu den Produkten</a>
+				<a th:href="@{/kategorien}" class="btn btn-outline-secondary">Kategorien entdecken</a>
+			</div>
+		</div>
 	</body>
 </html>
