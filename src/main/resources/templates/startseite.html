@@ -13,6 +13,20 @@
 				<a th:href="@{/produkte}" class="btn btn-primary me-2">Zu den Produkten</a>
 				<a th:href="@{/kategorien}" class="btn btn-outline-secondary">Kategorien entdecken</a>
 			</div>
+
+			<h2 class="mb-3">Unsere neuesten Angebote</h2>
+			<div class="row">
+				<div class="col-md-4 mb-4" th:each="produkt : ${produktListe}">
+					<div class="card h-100">
+						<div class="card-body">
+							<h5 class="card-title" th:text="${produkt.hersteller}"></h5>
+							<p class="card-text" th:text="${produkt.modell}"></p>
+							<p class="card-text"><strong th:text="${produkt.preis}"></strong> €</p>
+							<a th:href="@{/produkte/{id}(id=${produkt.id})}" class="btn btn-primary btn-sm">Ansehen</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
